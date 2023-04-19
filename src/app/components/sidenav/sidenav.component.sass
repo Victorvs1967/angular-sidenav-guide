@@ -1,9 +1,71 @@
-@import src/styles/_vars
-
 :host
-  width: $sidenav-width
+  width: var(--sidenav-width)
   height: 100vh
   position: sticky
   top: 0
   background: rgba(237, 241, 243, 1)
-  border-right: 2px solid rgba(192, 192, 192, 1)
+  &.is-expanded
+    width: var(--sidenav-collapsed-width)
+  .resize-handle
+    height: 100%
+    width: 2px
+    position: absolute
+    top: 0
+    right: 0
+    background: rgba(165, 165, 165, 1)
+    cursor: ew-resize !important
+    --webkit-touch-callout: none
+    --webkit-user-select: none
+    --khtml-user-select: none
+    --moz-user-select: none
+    --ms-user-select: none
+    user-select: none
+    transition: .3s background ease-out,  .3s width ease-out
+    &:hover
+      width: 3px
+      background: rgba(93, 159, 235, 1)
+    &::after
+      content: ""
+      height: 100%
+      width: 2.4rem
+      display: block
+      position: absolute
+      right: -1.2rem
+      z-index: 1
+    &.resizing
+      &::after
+        width: 100px
+        right: calc( -100px / 2 )
+  .toggle-button
+    $size: 25px
+    width: $size
+    height: $size
+    margin: 0
+    padding: 0
+    position: absolute
+    top: 4.8rem
+    right: calc(2px - ($size / 2))
+    display: flex
+    justify-content: center
+    align-items: center
+    border: 1px solid gray
+    border-radius: 50%
+    background: white
+    cursor: pointer
+    z-index: 20
+    &:hover
+      border: 2px solid rgba(36, 82, 231)
+    &.is-flipped
+      transform: rotate(-180deg)
+    fa-icon
+      font-size: 1.5em
+      width: fit-content
+      height: fit-content
+  .sidenav-body-container
+    height: 100%
+    padding: 1.6rem
+    overflow: auto
+    .sidenav-body
+      width: 100%
+      overflow-x: hidden
+  transition: .4s width cubic-bezier(.02,.68,.63,.98)
