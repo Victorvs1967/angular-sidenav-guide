@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SidenavService } from 'src/app/services/sidenav.service';
+import { SettingSidenavComponent } from '../../setting-sidenav/setting-sidenav.component';
 
 @Component({
   selector: 'app-setting',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./setting.component.sass']
 })
 export class SettingComponent {
+
+  sidenavService = inject(SidenavService);
+
+  ngAfterViewInit(): void {
+    this.sidenavService.push(SettingSidenavComponent);
+  }
+
+  ngOnDestroy(): void {
+    this.sidenavService.pop();
+  }
 
 }

@@ -10,11 +10,12 @@ import { LayoutComponent } from 'src/app/components/layout/layout.component';
 const routes: Routes = [
   { path: '', component: LayoutComponent,
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'screen1', component: Screen1Component },
       { path: 'screen2', component: Screen2Component },
-      { path: 'setting', component: SettingComponent },
+      { path: 'settings', component: SettingComponent },
     ]
   },
 ];

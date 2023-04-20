@@ -4,10 +4,9 @@
   position: sticky
   top: 0
   background: rgba(237, 241, 243, 1)
+  transition: .4s width cubic-bezier(.02,.68,.63,.98)
   &.is-expanded
     width: var(--sidenav-collapsed-width)
-  h1
-    margin-left: 1rem
   .resize-handle
     height: 100%
     width: 2px
@@ -69,4 +68,19 @@
     .sidenav-body
       width: 100%
       overflow-x: hidden
-  transition: .4s width cubic-bezier(.02,.68,.63,.98)
+      &.slide-in-from-left
+        animation: slideInFromLeft var(--sidenav-transition-duration) ease-out
+      &.slide-in-from-right
+        animation: slideInFromRight var(--sidenav-transition-duration) ease-out
+
+@keyframes slideInFromLeft
+  from
+    transform: translateX(-100%)
+  to
+    transform: translateX(0)
+
+@keyframes slideInFromRight
+  from
+    transform: translateX(100%)
+  to
+    transform: translateX(0)

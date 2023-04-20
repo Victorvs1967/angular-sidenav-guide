@@ -1,5 +1,6 @@
-import { Component, HostBinding, HostListener, inject } from '@angular/core';
-import { faHouse, faCog, faUserCircle, faDesktop, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { Component, HostBinding, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { SidenavContentAreaDirective } from 'src/app/directives/sidenav-content-area.directive';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
 @Component({
@@ -7,20 +8,24 @@ import { SidenavService } from 'src/app/services/sidenav.service';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.sass']
 })
-export class SidenavComponent {
-  faHouse = faHouse;
-  faCog = faCog;
-  faUserCircle = faUserCircle;
-  faDesktop = faDesktop;
+export class SidenavComponent implements OnInit {
   faAngleLeft = faAngleLeft;
 
   sidenavService = inject(SidenavService);
+
+  @ViewChild(SidenavContentAreaDirective, { static: true })
+  sidenavContentArea?: SidenavContentAreaDirective;
 
   resizingEvent = {
     isResizing: false,
     startingCursorX: 0,
     startingWidth: 0,
   };
+
+  ngOnInit(): void {
+    if (!this.sidenavContentArea) throw new Error('sideNavContentArea is undefined...');
+    this.sidenavService.setDynamicContentArea(this.sidenavContentArea);
+  }
 
   startResizing(event: MouseEvent): void {
     this.resizingEvent = {

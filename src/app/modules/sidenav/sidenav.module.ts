@@ -10,7 +10,10 @@ import { SettingComponent } from 'src/app/components/screens/setting/setting.com
 import { SidenavComponent } from 'src/app/components/sidenav/sidenav.component';
 import { LayoutComponent } from 'src/app/components/layout/layout.component';
 import { SidenavLinkComponent } from 'src/app/components/sidenav-link/sidenav-link.component';
+import { DefaultSidenavComponent } from 'src/app/components/default-sidenav/default-sidenav.component';
 import { UiModule } from '../ui/ui.module';
+import { SidenavContentAreaDirective } from 'src/app/directives/sidenav-content-area.directive';
+import { SettingSidenavComponent } from 'src/app/components/setting-sidenav/setting-sidenav.component';
 
 const SCREENS = [
   HomeComponent,
@@ -20,17 +23,25 @@ const SCREENS = [
   SettingComponent,
 ];
 
+const NAVS = [
+  DefaultSidenavComponent,
+  SettingSidenavComponent,
+];
+
 @NgModule({
   declarations: [
     LayoutComponent,
     SidenavComponent,
     SidenavLinkComponent,
+    SidenavContentAreaDirective,
+    ...NAVS,
     ...SCREENS,
   ],
   imports: [
     CommonModule,
     SidenavRoutingModule,
     UiModule,
-  ]
+  ],
+  providers: [ ],
 })
 export class SidenavModule { }
