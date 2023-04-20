@@ -9,7 +9,7 @@ import { DefaultSidenavComponent } from '../default-sidenav/default-sidenav.comp
 })
 export class LayoutComponent implements AfterViewInit, OnDestroy {
 
-  sidenabService = inject(SidenavService);
+  private sidenabService = inject(SidenavService);
   private cdr = inject(ChangeDetectorRef);
 
   ngAfterViewInit(): void {
