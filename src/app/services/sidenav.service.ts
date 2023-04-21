@@ -75,11 +75,11 @@ export class SidenavService {
   get sidenavTransitionDuration(): number {
     const sidenavTransitionDurationFromCssVariable = getComputedStyle(document.body)
       .getPropertyValue('--sidenav-transition-duration');
-    return parseInt(sidenavTransitionDurationFromCssVariable, 10);
+    return parseFloat(sidenavTransitionDurationFromCssVariable.slice(0, -1));
   }
 
   async #sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms * 1000));
   }
 
   async #animateInFromTheLeft() {
